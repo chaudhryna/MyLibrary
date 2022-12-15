@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>MyLibrary</title>
+		<link rel="stylesheet" href="./css/style.css" />
+		<link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
+        <script src="./js/script.js" defer></script>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<img src="./images/book-logo.png" alt="book logo" />
+				<h1>Welcome to My Library!</h1>
+			</header>
+			<div class="sidebar">
+				<form action="">
+					<h2>Create a New Book Listing</h2>
+					<div>
+						<label for="title">Book Title</label>
+						<input type="text" name="title" id="title" />
+					</div>
+					<div>
+						<label for="author">Author</label>
+						<input type="text" name="author" id="author" />
+					</div>
+					<div>
+						<label for="num-pages">Number of Pages</label>
+						<input type="number" name="num-pages" id="num-pages" />
+					</div>
+					<div class="check-read">
+						<label for="read">
+							Did you read it yet?
+							<input type="checkbox" name="read" id="read" />
+						</label>
+					</div>
+					<button type="button" class="btn">Add Book</button>
+				</form>
+			</div>
+			<main></main>
+			<footer>
+				<p>
+					This website is an Odin Project Assignment created by ✍️
+					Nancy Chaudhry
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

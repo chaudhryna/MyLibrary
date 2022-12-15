@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda+One&family=Roboto:wght@400;700&display=swap');
+/* Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+}
+
+/* Project setup */
+:root {
+    --primary-color: #7891FC;
+    --secondary-color: #BDA7FB;
+    --accent-color: #CD6FC0;
+    --main-bg-color: #DCDCDC ;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    height: 100vh;
+    display: grid;
+    grid-template-areas: 
+        "header header  header"
+        "sidebar main   main "
+        "sidebar main   main "
+        "footer  footer footer ";
+    grid-template-rows: 5em auto auto 3em;
+    grid-template-columns: 20em auto;
+}
+
+/* Header */
+header {
+    grid-area: header;
+    background-color: var(--primary-color);
+    padding: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+header img {
+    width: 5em;
+}
+
+h1 {
+    font-style: italic;
+    font-size: 2rem;
+    text-align: center;
+    font-family: 'Merienda One', cursive;
+}
+
+/* Sidebar */
+.sidebar {
+    grid-row: sidebar;
+    background-color: var(--secondary-color);
+}
+
+form {
+    margin-top: 2em;
+    width: 30em;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+form h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 2em 0;
+    padding: .5em 1em;
+    border-radius: 8px;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
+}
+
+form label {
+    margin: 0.5rem 0;
+    display: block;
+}
+
+form input[type="text"],
+form input[type="number"] {
+    width: 100%;
+    padding: .5em;
+    border-radius: 8px;
+}
+
+form .check-read {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 2em;
+}
+
+form .check-read label {
+    font-style: italic;
+}
+
+form input[type="checkbox"] {
+    margin-left: 2em;
+}
+
+form button {
+    background-color: var(--accent-color);
+    border: none;
+    color: white;
+    padding: .5em 1em;
+    margin-top: 1em;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 1.5rem;
+    box-shadow: 0 10px 6px -6px #777;
+}
+
+/* Main */
+main {
+    grid-area: main;
+    padding: 2.5em 3em;
+    display: grid;
+    gap: 4em;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    background: var(--main-bg-color);
+}
+
+.card {
+    width: 300px;
+    height: 250px;
+    padding: 1em;
+    background-color: #fff;
+    border-radius: 8px;
+    display: grid;
+    border-left: 4px solid var(--secondary-color);
+    box-shadow: 0 10px 6px -6px #777;
+}
+
+.card img {
+    width: 2em;
+}
+
+.card .title {
+    font-size: 1.3rem;
+}
+
+.card em {
+    font-weight: bold;
+}
+
+.card .trash-can {
+    cursor: pointer;
+
+}
+
+/* Footer */
+footer {
+    grid-area: footer;
+    background-color: var(--primary-color);
+    padding: 1em;
+}
+
+footer p {
+    text-align: center;
+    font-style: italic;
+}
