@@ -4,9 +4,8 @@ const numPages = document.querySelector("#num-pages");
 const read = document.querySelector("#read");
 const btn = document.querySelector(".btn");
 const main = document.querySelector("main");
-let trashCans = document.querySelectorAll('.trash-can');
 
-let myLibrary = [
+const myLibrary = [
 	{
 		title: 'The Hobbit',
 		author: 'J.R.R. Tolkien',
@@ -23,28 +22,52 @@ let myLibrary = [
 		title: 'Grokking Algorithms',
 		author: 'Aditya Bhargava',
 		numPages: 256,
-		read: false
+		read: false,
 	},
 	{
 		title: 'Winnie the Pooh',
 		author: 'A.A. Milne',
 		numPages: 176,
-		read: true 
-	}
+		read: true, 
+	},
 ];
 
 function loadLibrary(myLibrary) {
-	myLibrary.forEach(function (book, index) {
-		main.innerHTML += `<div class="book card">
-            <h3 class="title"><em>Title:</em> ${book.title}</h3>
-            <h3 class="author"><em>Author:</em> ${book.author}</h3>
-            <h3 class="pages"><em>Pages:</em> ${book.numPages}</h3>
-            <h3 class="read"><em>Read:</em> ${book.read}</h3>
-			<img data-book="${index}" class="trash-can" src="./images/trash-can.svg">
-        </div>`
+	myLibrary.forEach((book, index) => {
+		const cardDiv = document.createElement("div");
+		cardDiv.classList.add("book");
+		cardDiv.classList.add("card");
+		const title = document.createElement("h3");
+		title.classList.add("title");
+		title.textContent = `Title: ${book.title}`
+		cardDiv.appendChild(title);
+		const author = document.createElement("h3");
+		author.classList.add("author");
+		author.textContent = `Author: ${book.author}`;
+		cardDiv.appendChild(author);
+		const pages = document.createElement('h3');
+		pages.classList.add('pages');
+		pages.textContent = `Pages: ${book.numPages}`;
+		cardDiv.appendChild(pages);
+		const read = document.createElement('h3');
+		read.classList.add('read');
+		read.textContent = `Read: ${book.read}`;
+		cardDiv.appendChild(read);
+		const can = document.createElement("img");
+		can.classList.add("trash-can");
+		can.src = './images/trash-can.svg';
+		can.setAttribute("data-book", `${index}`)
+		can.addEventListener('click', deleteBook);
+		cardDiv.appendChild(can);
+		main.appendChild(cardDiv);
 	});
-	trashCans = document.querySelectorAll('.trash-can');
-}
+};
+
+function deleteBook(e) {
+	const index = e.target.getAttribute('data-book');
+	myLibrary.splice(index, 1);
+	loadLibrary();
+};
 
 function Book(title, author, numPages, read) {
 	this.title = title;
@@ -56,9 +79,7 @@ function Book(title, author, numPages, read) {
 			read ? 'read' : 'not read yet'
 		}`;
 	};
-}
-
-// function deleteBook()
+};
 
 function addBookToLibrary(e) {
 	e.preventDefault();
@@ -70,14 +91,8 @@ function addBookToLibrary(e) {
 	author.value = '';
 	numPages.value = '';
 	read.checked = '';
-}
+};
 
 btn.addEventListener('click', addBookToLibrary);
 
-
-trashCans.forEach((trashCan) => {
-	console.log(trashCan);
-	trashCan.addEventListener('click', () => {
-		console.log(`Trash can clicked!`);
-	});
-});
+loadLibrary(myLibrary);
