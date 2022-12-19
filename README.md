@@ -1,4 +1,6 @@
-# MyLibrary  an Odin Project creating a personal website to add and track the reading status of a small library.  Project requirements included using an object, prototype inheritance, saving the books in an array, and a delete button and read button on each book.
+# MyLibrary  
+
+An Odin Project creating a personal website to add and track the reading status of a small library.  Project requirements included using an object, prototype inheritance, saving the books in an array, and a delete button and read button on each book.
 
 The project uses HTML, CSS, and JavaScript. 
 
