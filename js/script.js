@@ -5,34 +5,35 @@ const read = document.querySelector("#read");
 const btn = document.querySelector(".btn");
 const main = document.querySelector("main");
 
-const myLibrary = [
-	{
-		title: 'The Hobbit',
-		author: 'J.R.R. Tolkien',
-		numPages: 295,
-		read: false,
-	},
-	{
-		title: 'Death on the Nile',
-		author: 'Agatha Christie',
-		numPages: 352,
-		read: true,
-	},
-	{
-		title: 'Grokking Algorithms',
-		author: 'Aditya Bhargava',
-		numPages: 256,
-		read: false,
-	},
-	{
-		title: 'Winnie the Pooh',
-		author: 'A.A. Milne',
-		numPages: 176,
-		read: true, 
-	},
-];
+const myLibrary = [];
+
+// Book object
+class Book {
+  constructor(title, author, numPages, read) {
+	this.title = title;
+	this.author = author;
+	this.numPages = numPages;
+	this.read = read;
+  }
+  toggleRead() {
+		this.read = !this.read;
+  }
+};
+
+function addBookToLibrary(e) {
+	e.preventDefault();
+	let newBook = new Book(title.value, author.value, numPages.value, read.checked);
+	myLibrary.push(newBook);
+	loadLibrary(myLibrary);
+	newBook = {};
+	title.value = '';
+	author.value = '';
+	numPages.value = '';
+	read.checked = '';
+};
 
 function loadLibrary(myLibrary) {
+	main.replaceChildren();
 	myLibrary.forEach((book, index) => {
 		const cardDiv = document.createElement("div");
 		cardDiv.classList.add("book");
@@ -49,50 +50,42 @@ function loadLibrary(myLibrary) {
 		pages.classList.add('pages');
 		pages.textContent = `Pages: ${book.numPages}`;
 		cardDiv.appendChild(pages);
-		const read = document.createElement('h3');
-		read.classList.add('read');
-		read.textContent = `Read: ${book.read}`;
-		cardDiv.appendChild(read);
+		const btnDiv = document.createElement("div");
+		btnDiv.classList.add("div-grid");
+		cardDiv.appendChild(btnDiv);
 		const can = document.createElement("img");
 		can.classList.add("trash-can");
 		can.src = './images/trash-can.svg';
 		can.setAttribute("data-book", `${index}`)
 		can.addEventListener('click', deleteBook);
-		cardDiv.appendChild(can);
+		btnDiv.appendChild(can);
+		const toggleLabel = document.createElement("label");
+		toggleLabel.textContent = "Read it?";
+		btnDiv.appendChild(toggleLabel);
+		const toggleRead = document.createElement("input");
+		toggleRead.classList.add('toggleRead');
+		toggleRead.setAttribute('data-book', `${index}`);
+		toggleRead.setAttribute('type', 'checkbox');
+		if (book.read) {
+			toggleRead.checked = true;
+		}
+		toggleRead.addEventListener('click', checkRead);
+		btnDiv.appendChild(toggleRead);
 		main.appendChild(cardDiv);
 	});
 };
 
 function deleteBook(e) {
 	const index = e.target.getAttribute('data-book');
+	console.log(index);
 	myLibrary.splice(index, 1);
-	loadLibrary();
-};
-
-function Book(title, author, numPages, read) {
-	this.title = title;
-	this.author = author;
-	this.numPages = numPages;
-	this.read = read;
-	this.info = function () {
-		return `${title} by ${author}, ${numPages} pages ${
-			read ? 'read' : 'not read yet'
-		}`;
-	};
-};
-
-function addBookToLibrary(e) {
-	e.preventDefault();
-	let newBook = new Book(title.value, author.value, numPages.value, read.checked);
-	myLibrary.push(newBook);
 	loadLibrary(myLibrary);
-	newBook = {};
-	title.value = '';
-	author.value = '';
-	numPages.value = '';
-	read.checked = '';
+};
+
+function checkRead(e) {
+	const index = e.target.getAttribute('data-book');
+	myLibrary[index].toggleRead();
 };
 
 btn.addEventListener('click', addBookToLibrary);
 
-loadLibrary(myLibrary);
